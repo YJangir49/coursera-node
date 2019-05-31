@@ -21,6 +21,7 @@ const server = http.createServer((req,res)=>{
         const fileExt = path.extname(filePath);
         if(fileExt == '.html'){
             fs.exists(filePath, (exists)=>{
+                console.log(filePath);
                 if(!exists){
                     res.statusCode=404;
                     res.setHeader('Content-Type', 'text/html');
