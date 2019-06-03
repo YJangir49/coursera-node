@@ -35,4 +35,4 @@ const leaderSchema = new Schema ({
 
 const Leaders = mongoose.model('Leader', leaderSchema);
 
-module.exports = Promos;
+module.exports = Leaders;

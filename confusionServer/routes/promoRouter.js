@@ -20,10 +20,10 @@ promoRouter.route('/')
 })
 .post((req, res, next) => {
     Promos.create(req.body)
-    .then((dish)=>{
+    .then((promo)=>{
         res.statusCode=200;
         res.setHeader('Content-Type','application/json');
-        res.json(dish);
+        res.json(promo);
     },(err)=>{next(err);})
     .catch((err)=>{next(err)});
 })
@@ -44,10 +44,10 @@ promoRouter.route('/')
 promoRouter.route('/:promoId')
 .get((req,res,next)=>{
     Promos.findById(req.params.promoId)
-    .then((dish)=>{
+    .then((promo)=>{
         res.statusCode=200;
         res.setHeader('Content-Type', 'application/json');
-        res.json(dish);
+        res.json(promo);
     }, (err)=>{next(err)})
     .catch((err)=>{next(err)});    
 })
@@ -57,10 +57,10 @@ promoRouter.route('/:promoId')
 })
 .put((req, res, next) => {
     Promos.findByIdAndUpdate(req.params.promoId, {$set: req.body},{new:true})
-    .then((dish)=>{
+    .then((promo)=>{
         res.statusCode=200;
         res.setHeader('Content-Type', 'application/json');
-        res.json(dish);
+        res.json(promo);
     },(err)=>{next(err);})
     .catch((err)=>{next(err);});
 })
