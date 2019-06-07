@@ -12,6 +12,9 @@ var dishRouter = require("./routes/dishRouter");
 var promoRouter = require("./routes/promoRouter");
 var leaderRouter = require("./routes/leaderRouter");
 
+var passport = require("passport");
+var authenticate = require("./authenticate");
+
 const mongoose = require("mongoose");
 const Dishes = require("./models/dishes");
 const Promos = require("./models/promotions");
@@ -49,22 +52,20 @@ app.use(
     store: new FileStore()
   })
 );
+
+app.use(passport.initialize());
+app.use(passport.session());
+
 app.use("/", indexRouter);
 app.use("/users", usersRouter);
 
 function auth(req, res, next) {
-  if (!req.session.user) {
+  if (!req.user) {
     var err = new Error("You are not authenticated!");
     err.status = 403;
-    return next(err);
+    next(err);
   } else {
-    if (req.session.user === "authenticated") {
-      next();
-    } else {
-      var err = new Error("You are not authenticated!");
-      err.status = 403;
-      return next(err);
-    }
+    next();
   }
 }
 
