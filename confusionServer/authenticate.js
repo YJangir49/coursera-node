@@ -19,7 +19,7 @@ ops.secretOrKey = config.secretKey;
 ops.jwtFromRequest = ExtractJwt.fromAuthHeaderAsBearerToken();
 
 exports.jwtPassport = passport.use(
-  new JwtStrategy(ops, (jwt_payload, err) => {
+  new JwtStrategy(ops, (jwt_payload, done) => {
     console.log("JWT_PAYLOAD: " + jwt_payload);
     User.findOne({ _id: jwt_payload._id }, (err, user) => {
       if (err) {
