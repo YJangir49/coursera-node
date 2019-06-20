@@ -11,7 +11,7 @@ promoRouter.use(bodyParser.json());
 promoRouter
   .route("/")
   .get((req, res, next) => {
-    Promos.find({})
+    Promos.find(req.query)
       .then(
         promos => {
           res.statusCode = 200;
